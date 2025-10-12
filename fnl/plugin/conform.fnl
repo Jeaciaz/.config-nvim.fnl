@@ -1,15 +1,14 @@
-;; Autoformatting buffers
-(local conform (require :conform))
+;; formatting engine
 
-;; Format on save with 500ms delay
-(conform.setup {:format_on_save {:timeout_ms 500 :lsp_format "fallback"}
-                ;; Set some useful formatters, install them by yourself ^-^
-                :formatters_by_ft {:lua [:stylua]
-                                   :rust [:rustfmt]
-                                   :zig [:zigfmt]
-                                   :javascript [:prettier]
-                                   :html [:prettier]
-                                   :json [:prettier]
-                                   :css [:prettier]
-                                   :odin [:odinfmt]
-                                   :fennel [:fnlfmt]}})
+(fn fmt []
+  (let [conform (require :conform)]
+    (conform.format {:bufnr (vim.api.nvim_get_current_buf) :lsp_format :first})))
+
+{1 :stevearc/conform.nvim
+ :opts {:formatters_by_ft {:javascript [:eslint :prettierd]
+                           :typescript [:eslint :prettierd]
+                           :typescriptreact [:eslint :prettierd]
+                           :lua [:lua-format]
+                           :fennel [:fnlfmt]
+                           :sql [:sqlfmt]}}
+ :keys [[:<leader>ff fmt]]}

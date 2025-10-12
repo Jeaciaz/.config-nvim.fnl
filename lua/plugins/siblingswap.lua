@@ -1,0 +1,2 @@
+-- :fennel:1755511862
+return {"Wansmer/sibling-swap.nvim", opts = {inteline_swaps_without_separator = true, keymaps = {["<C-.>"] = "swap_with_right_with_opp", ["<C-,>"] = "swap_with_left_with_opp"}}, keys = {{"<C-.>", "<Nop>"}, {"<C-,>", "<Nop>"}}}

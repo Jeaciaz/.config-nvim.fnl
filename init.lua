@@ -1,65 +1,36 @@
--- Initial setup with native Neovim package manager (0.12+)
-vim.pack.add({
-        -- Fennel packages
-		"https://github.com/udayvir-singh/tangerine.nvim",
-		"https://github.com/udayvir-singh/hibiscus.nvim",
-        -- Nerd font icons
-		"https://github.com/nvim-tree/nvim-web-devicons",
-        -- Colorscheme
-		"https://github.com/nyoom-engineering/oxocarbon.nvim",
-        -- Premade LSP configurations
-		"https://github.com/neovim/nvim-lspconfig",
-        -- Autoformatting buffers
-		"https://github.com/stevearc/conform.nvim",
-        -- Tree-sitter integration
-		"https://github.com/nvim-treesitter/nvim-treesitter",
-        -- Modern file explorer
-		"https://github.com/stevearc/oil.nvim",
-        -- Completion engine
-		{
-		 src = "https://github.com/saghen/blink.cmp", 
-		 version = "v1.6.0"
-		},
-        -- Git GUI inside Neovim
-		"https://github.com/NeogitOrg/neogit",
-		"https://github.com/nvim-lua/plenary.nvim",
-        -- Find files, text and much more
-		"https://github.com/echasnovski/mini.pick",
-        -- Statusline with sensible defaults
-		"https://github.com/echasnovski/mini-git",
-		"https://github.com/echasnovski/mini.diff",
-		"https://github.com/echasnovski/mini.statusline",
-        -- Add pairs for brackets, braces, etc.
-		"https://github.com/echasnovski/mini.pairs",
-        -- Show diagnostics
-		"https://github.com/folke/trouble.nvim",
-        -- Make previewing markdown beautiful
-		"https://github.com/MeanderingProgrammer/render-markdown.nvim",
-        -- Seamless buffer switching
-		{
-		 src = "https://github.com/ThePrimeagen/harpoon",
-		 version = "harpoon2"
-		},
-})
+local function bootstrap(url, ref)
+    local name = url:gsub(".*/", "")
+    local path = vim.fn.stdpath [[data]] .. "/lazy/" .. name
 
--- Setup fennel compilation
-require "tangerine".setup({
+    if vim.fn.isdirectory(path) == 0 then
+        print(name .. ": installing in data dir...")
 
-	-- save fnl output in a separate dir, it gets automatically added to package.path
-	target = vim.fn.stdpath [[data]] .. "/tangerine",
+        vim.fn.system {"git", "clone", url, path}
+        if ref then vim.fn.system {"git", "-C", path, "checkout", ref} end
 
-	-- compile files in &rtp, check ":help runtimepath"
-	rtpdirs = {
-		"plugin",
-		"colors",
-	},
+        vim.cmd [[redraw]]
+        print(name .. ": finished installing")
+    end
+    vim.opt.runtimepath:prepend(path)
+end
 
-	compiler = {
-		-- disable popup showing compiled files
-		verbose = false,
+bootstrap("https://github.com/udayvir-singh/tangerine.nvim")
 
-		-- compile every time you change fennel files or on entering vim
-		hooks = {"onsave", "oninit"}
-	}
+-- Optional and only needed if you also want the macros
+bootstrap("https://github.com/udayvir-singh/hibiscus.nvim")
 
-})
+require'tangerine'.setup {
+    target = vim.fn.stdpath [[data]] .. "/tangerine",
+
+    -- compile files in &rtp
+    rtpdirs = {"ftplugin"},
+    custom = {{"~/.config/nvim/fnl/lsp", "~/.config/nvim/lsp"}},
+
+    compiler = {
+        -- disable popup showing compiled files
+        verbose = false,
+
+        -- compile every time changes are made to fennel files or on entering vim
+        hooks = {"onsave", "oninit"}
+    }
+}
