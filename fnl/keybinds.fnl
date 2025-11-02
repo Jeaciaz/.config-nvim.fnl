@@ -3,9 +3,6 @@
 ;; Set keybindings with "map!" macro like this:
 ;; (map! [list of modes] "keybinding" function "keybinding description")
 
-;; Trouble for diagnostics popup
-(map! [:n] :<leader>dd ":Trouble diagnostics toggle<CR>" "Open Diagnostics")
-
 ;; Removes highlighting after the search with "/" or "?"
 (map! [:n] :<C-g> ":noh<CR>" "Remove highlighting")
 
@@ -18,3 +15,5 @@
 (map! [:n] "<Leader>[" :<Cmd>cp<CR>)
 (map! [:n] "<Leader>]" :<Cmd>cn<CR>)
 (map! [:n] :gr vim.lsp.buf.references)
+(map! [:n] :gd vim.lsp.buf.definition)
+(map! [:n] :gt vim.lsp.buf.type_definition)

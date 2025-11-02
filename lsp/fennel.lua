@@ -1,4 +1,4 @@
--- :fennel:1755584862
+-- :fennel:1760858159
 local function root_dir(bufnr, on_dir)
   local fname = vim.api.nvim_buf_get_name(bufnr)
   local function has_fls_project_cfg(path)

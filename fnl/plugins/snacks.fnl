@@ -1,4 +1,5 @@
 (fn snacks [] (require :snacks))
+
 {1 :folke/snacks.nvim
  :priority 1000
  :lazy false
@@ -8,19 +9,26 @@
                     :open (fn [url] (vim.fn.setreg "+" url))}
         :picker {:enabled true
                  :formatters {:file {:filename_first true}}
-                 :input {:keys {:Esc {1 :close :mode [:n :i]}}}}}
+                 :input {:keys {:Esc {1 :close :mode [:n :i]}}}}
+        :lazygit {:configure true}}
  :keys [[:<Leader>gl
          (fn []
            ((. (snacks) :gitbrowse :open)))]
         [:<C-p>
          (fn []
-           ((. (snacks) :picker :git_files)))]
+           ((. (snacks) :picker :git_files {:untracked true})))]
+        [:<C-P>
+         (fn []
+           ((. (snacks) :picker :files) {:hidden true :ignored true}))]
         [:<Leader>gg
          (fn []
-           ((. (snacks) :picker :git_grep)))]
+           ((. (snacks) :picker :git_grep) {:untracked true}))]
         [:<Leader>gs
          (fn []
            ((. (snacks) :picker :grep_word)))]
         [:<Leader>fb
          (fn []
-           ((. (snacks) :picker :buffers) {:focus :list :sort_lastused true}))]]}
+           ((. (snacks) :picker :buffers) {:focus :list :sort_lastused true}))]
+        [:<Leader>lg
+         (fn []
+           ((. (snacks) :lazygit)))]]}

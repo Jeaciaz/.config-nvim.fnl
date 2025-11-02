@@ -32,4 +32,4 @@
   :config setup-ts!}
  {1 :nvim-treesitter/nvim-treesitter-context
   :lazy false
-  :opts {:enable true :separator "~"}}]
+  :opts {:enable true :separator "~" :max_lines 5 :trim_scope :inner}}]

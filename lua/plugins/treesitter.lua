@@ -1,4 +1,4 @@
--- :fennel:1755515687
+-- :fennel:1762071960
 local langs = {"bash", "css", "dockerfile", "graphql", "html", "javascript", "json", "lua", "nginx", "fennel", "sql", "tsx", "typescript", "yaml", "typescriptreact"}
 local function setup_ts_21()
   local ts = require("nvim-treesitter")
@@ -15,4 +15,4 @@ local function setup_ts_21()
   vim.opt["indentexpr"] = "v:lua.require\"nvim-treesitter\".indentexpr()"
   return autotag.setup({opts = {auto_close_on_slash = true}})
 end
-return {{"nvim-treesitter/nvim-treesitter", branch = "main", build = ":TSUpdate", config = setup_ts_21, lazy = false}, {"nvim-treesitter/nvim-treesitter-context", opts = {enable = true, separator = "~"}, lazy = false}}
+return {{"nvim-treesitter/nvim-treesitter", branch = "main", build = ":TSUpdate", config = setup_ts_21, lazy = false}, {"nvim-treesitter/nvim-treesitter-context", opts = {enable = true, separator = "~", max_lines = 5, trim_scope = "inner"}, lazy = false}}

@@ -1,4 +1,4 @@
--- :fennel:1755509272
+-- :fennel:1760858159
 local function search_result()
   if (vim.v.hlsearch == 0) then
     return ""

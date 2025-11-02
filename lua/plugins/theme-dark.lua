@@ -1,4 +1,4 @@
--- :fennel:1761592718
+-- :fennel:1761592762
 local function _1_()
   local catppuccin = require("catppuccin")
   local function _2_(colors)
@@ -14,4 +14,4 @@ local function _1_()
   catppuccin.setup({flavour = "frappe", no_italic = true, custom_highlights = _2_})
   return vim.cmd.colorscheme("catppuccin")
 end
-return {"catppuccin/nvim", name = "catppuccin", dependencies = {"f-person/auto-dark-mode.nvim"}, config = _1_, lazy = false}
+return {"catppuccin/nvim", name = "catppuccin", config = _1_, lazy = false}

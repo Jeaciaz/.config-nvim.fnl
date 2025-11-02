@@ -1,4 +1,3 @@
-(local color! (require :util.color!))
 (local set! (require :util.set!))
 (local hi! (require :util.hi!))
 
@@ -17,15 +16,14 @@
 (set vim.g.maplocalleader " ")
 
 (let [lazy (require :lazy)]
-  (lazy.setup :plugins
-              {:checker {:enabled false}
+  (lazy.setup {:spec {:import :plugins}
+               :checker {:enabled false}
                :defaults {:lazy true}
-               :install {:colorscheme [:nordic]}
+               :install {:colorscheme [:catppuccin]}
                :performance {:rtp {:reset false} :reset_packpath false}}))
 
 (require :keybinds)
 (require :lsp)
-(require :plugin)
 
 (set! :cursorline)
 (set! :title)
@@ -47,8 +45,6 @@
 (set! :scrolloff 8)
 (set! :updatetime 1000)
 (set! :signcolumn :yes)
-(set! :background :dark)
-(color! :kanagawa)
 
 (hi! :Cursor {:fg "#d4cde5" :bg "#5eaf77"})
 

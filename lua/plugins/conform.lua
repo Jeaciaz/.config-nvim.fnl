@@ -1,4 +1,4 @@
--- :fennel:1755506698
+-- :fennel:1760953186
 local function fmt()
   local conform = require("conform")
   return conform.format({bufnr = vim.api.nvim_get_current_buf(), lsp_format = "first"})

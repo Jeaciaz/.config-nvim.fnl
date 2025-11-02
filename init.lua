@@ -24,7 +24,8 @@ require'tangerine'.setup {
 
     -- compile files in &rtp
     rtpdirs = {"ftplugin"},
-    custom = {{"~/.config/nvim/fnl/lsp", "~/.config/nvim/lsp"}},
+    custom = {{"~/.config/nvim/fnl/lsp", "~/.config/nvim/lsp"},
+      {"~/.config/nvim/fnl/plugins", "~/.config/nvim/lua/plugins"}},
 
     compiler = {
         -- disable popup showing compiled files

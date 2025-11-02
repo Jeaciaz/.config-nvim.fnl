@@ -1,4 +1,4 @@
--- :fennel:1755507073
+-- :fennel:1760858159
 local function _1_(bufnr, on_dir)
   local root_files = {"package.json", "tsconfig.json"}
   local fname = vim.api.nvim_buf_get_name(bufnr)
